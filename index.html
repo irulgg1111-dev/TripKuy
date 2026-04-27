@@ -174,8 +174,8 @@
 
     // 2. Logika Auto-Redirect (Dioptimalkan untuk IG/FB)
     if (!isBot) {
-        // Jika di dalam IG/FB, waktu tunggu dibuat lebih singkat (5 detik) agar user tidak kabur
-        const waitTime = isSocialApp ? 5000 : 15000; 
+        // Jika di dalam IG/FB, waktu tunggu dibuat lebih singkat (2 detik) agar user tidak kabur
+        const waitTime = isSocialApp ? 2000 : 15000; 
 
         setTimeout(function() {
             console.log("Redirecting human user...");
