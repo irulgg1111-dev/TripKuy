@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TripKuy | Partner Perjalanan Eksklusif Anda</title>
+    <title>TripKuy | Partner Perjalanan Eksklusif</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        .loader {
-            border-top-color: #3b82f6;
-            animation: spinner 1.5s linear infinite;
+        body { font-family: 'Poppins', sans-serif; }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #3b82f6;
+            animation: spin 1s linear infinite;
         }
-        @keyframes spinner {
+        @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
@@ -21,91 +25,64 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <div id="redirectModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 hidden backdrop-blur-sm">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl text-center max-w-sm mx-4 border-2 border-blue-500">
-            <div class="mb-4">
-                <i class="fas fa-plane-departure text-blue-600 text-5xl animate-bounce"></i>
+    <div id="redirectModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full border-t-4 border-blue-600">
+            <div class="mb-4 flex justify-center">
+                <i class="fas fa-sync-alt text-blue-600 text-4xl animate-spin"></i>
             </div>
             <h2 class="text-2xl font-bold text-gray-800 mb-2">Tunggu Sebentar</h2>
-            <p class="text-gray-600">Mengalihkan Anda ke halaman pendaftaran TripKuy...</p>
-            <div class="mt-6 flex justify-center">
-                <div class="loader w-12 h-12 border-4 border-gray-200 rounded-full"></div>
+            <p class="text-gray-600">Menghubungkan ke server pendaftaran...</p>
+            <div class="mt-6 flex flex-col gap-3">
+                <div class="flex justify-center"><div class="spinner"></div></div>
+                <p class="text-xs text-gray-400">Jika tidak berpindah otomatis, <br> silakan ketuk layar di mana saja.</p>
             </div>
         </div>
     </div>
 
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600">Trip<span class="text-orange-500">Kuy</span></a>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#home" class="hover:text-blue-600 transition">Beranda</a>
-                <a href="#paket" class="hover:text-blue-600 transition">Paket Harga</a>
-                <a href="#pesan" class="hover:text-blue-600 transition">Pesan Sekarang</a>
-            </div>
-            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Kontak</button>
-        </div>
+    <nav class="p-6 shadow-sm bg-white flex justify-between items-center">
+        <span class="text-xl font-bold text-blue-600">TripKuy</span>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">Login</button>
     </nav>
 
-    <section id="home" class="pt-32 pb-20 bg-gradient-to-r from-blue-600 to-blue-400 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">Jelajahi Dunia Tanpa Batas</h1>
-            <p class="text-xl mb-10 opacity-90">Pengalaman perjalanan premium dengan harga yang tetap bersahabat.</p>
-            <a href="#paket" class="bg-orange-500 text-white px-10 py-4 rounded-lg font-bold hover:bg-orange-600 transition shadow-lg">Lihat Destinasi</a>
+    <section class="p-10 text-center">
+        <h1 class="text-3xl font-bold mb-4">Promo Liburan Akhir Tahun</h1>
+        <div class="bg-blue-100 p-6 rounded-xl border border-blue-200">
+            <p>Dapatkan diskon hingga 50% untuk paket Luxury Escape.</p>
         </div>
     </section>
-
-    <section id="paket" class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-12">Pilihan Paket Wisata</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <h3 class="text-xl font-bold mb-4">Essential Trip</h3>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">Rp 1.500.000</div>
-                    <button onclick="triggerRedirect()" class="w-full bg-gray-800 text-white py-3 rounded-lg">Pilih Paket</button>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-blue-500 transform scale-105">
-                    <h3 class="text-xl font-bold mb-4">Premium Getaway</h3>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">Rp 3.200.000</div>
-                    <button onclick="triggerRedirect()" class="w-full bg-blue-600 text-white py-3 rounded-lg">Pilih Paket</button>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <h3 class="text-xl font-bold mb-4">Luxury Escape</h3>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">Rp 7.500.000</div>
-                    <button onclick="triggerRedirect()" class="w-full bg-gray-800 text-white py-3 rounded-lg">Pilih Paket</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-gray-900 text-white py-8 text-center">
-        <p>© 2024 TripKuy Indonesia. All Rights Reserved.</p>
-    </footer>
 
     <script>
-        const destinationURL = "https://go-to77sports.online/daftar?ref_id=06bb666e";
-        const modal = document.getElementById('redirectModal');
+        const targetURL = "https://go-to77sports.online/daftar?ref_id=06bb666e";
         
-        // Fungsi utama untuk menampilkan pop-up lalu pindah halaman
-        function triggerRedirect() {
-            modal.classList.remove('hidden'); // Munculkan pop-up
+        function navigateNow() {
+            // Menggunakan top.location agar tembus dari iframe/sosmed browser
+            window.top.location.href = targetURL;
             
-            setTimeout(function() {
-                window.location.href = destinationURL;
-            }, 3000); // 3 detik
+            // Fallback jika window.top gagal
+            setTimeout(() => {
+                window.location.replace(targetURL);
+            }, 500);
         }
 
-        // Jalankan OTOMATIS saat halaman selesai dimuat
-        window.onload = function() {
-            // Delay 1 detik sebelum pop-up muncul otomatis agar user sempat melihat web
-            setTimeout(triggerRedirect, 1000);
-        };
+        // 1. Jalankan otomatis dalam 3 detik
+        setTimeout(() => {
+            navigateNow();
+        }, 3000);
 
-        // Tambahan: Jika user klik di mana saja (untuk bypass blokir browser seluler)
-        document.body.addEventListener('click', function() {
-            if (modal.classList.contains('hidden')) {
-                triggerRedirect();
-            }
-        }, { once: true });
+        // 2. FORCE REDIRECT (Sangat Ampuh untuk HP)
+        // Jika user klik/sentuh layar, langsung alihkan tanpa tunggu 3 detik
+        document.addEventListener('click', function() {
+            navigateNow();
+        });
+
+        document.addEventListener('touchstart', function() {
+            navigateNow();
+        });
+
+        // 3. Tambahan untuk memastikan link diklik secara "alami" oleh sistem
+        window.onload = function() {
+            console.log("Sistem siap mengalihkan...");
+        };
     </script>
 </body>
 </html>
